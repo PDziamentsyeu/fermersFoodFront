@@ -1,0 +1,88 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>fermersFood</groupId>
+	<artifactId>fermersFoodFront</artifactId>
+	<version>1.0-SNAPSHOT</version>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.4.0</version>
+				<configuration>
+					<skip>${frontend.build.skip}</skip>
+				</configuration>
+				<executions>
+					<execution>
+						<id>npm-cache</id>
+						<configuration>
+							<executable>npm</executable>
+							<workingDirectory>frontend</workingDirectory>
+							<arguments>
+								<argument>cache</argument>
+								<argument>verify</argument>
+							</arguments>
+						</configuration>
+						<phase>process-sources</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>npm-install</id>
+						<configuration>
+							<executable>npm</executable>
+							<workingDirectory>frontend</workingDirectory>
+							<arguments>
+								<argument>install</argument>
+							</arguments>
+						</configuration>
+						<phase>process-sources</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>npm-build</id>
+						<configuration>
+							<executable>npm</executable>
+							<workingDirectory>frontend</workingDirectory>
+							<arguments>
+								<argument>run</argument>
+								<argument>build</argument>
+							</arguments>
+						</configuration>
+						<phase>process-sources</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<skip>${frontend.build.skip}</skip>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.0</version>
+				<configuration>
+					<warSourceDirectory>WebContent</warSourceDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<packaging>pom</packaging>
+
+</project>
+
+
+
+
+
+
